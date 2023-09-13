@@ -1,3 +1,3 @@
 # Get-Started-With-Langchain-and-Pinecone-in-Node.js
 
-From my youtube tutorial: https://youtu.be/CF5buEVrYwo
+Based loosely on this tutorial and modified with the help of GPT 4 https://youtu.be/CF5buEVrYwo
