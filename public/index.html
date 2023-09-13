@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Langchain Query Interface</title>
+    <style>
+        #history div {
+            padding: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+    <script>
+        async function submitQuestion() {
+            const questionInput = document.getElementById("question");
+            const historyDiv = document.getElementById("history");
+            const question = questionInput.value;
+
+            // Display the asked question in history
+            const questionDiv = document.createElement("div");
+            questionDiv.innerText = "You: " + question;
+            historyDiv.appendChild(questionDiv);
+
+            // Send a POST request to the server
+            const response = await fetch("http://localhost:3000/ask", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    question: question
+                })
+            });
+
+            const data = await response.json();
+
+            // Display the received answer in history
+            const answerDiv = document.createElement("div");
+            answerDiv.innerText = "Bot: " + data.answer;
+            historyDiv.appendChild(answerDiv);
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Ask a Question</h1>
+    <input type="text" id="question" placeholder="Type your question here">
+    <button onclick="submitQuestion()">Submit</button>
+    <h2>Conversation History</h2>
+    <div id="history"></div>
+</body>
+
+</html>
